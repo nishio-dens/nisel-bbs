@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<topic>
+<comment><no>1</no><author>test</author><mail>test</mail><id>testid</id><date>2009年11月27日 15時18分25秒</date><message>test</message><title>test</title><password>a94a8fe5ccb19ba61c4c0873d391e987982fbbd3</password></comment>
+<comment><no>2</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時18分29秒</date><message>テストメッセージ</message></comment>
+<comment><no>3</no><author>Delete</author><mail>Delete</mail><id>null</id><date>2009年11月27日 15時18分30秒</date><message>Delete</message></comment>
+<comment><no>4</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時18分31秒</date><message>テストメッセージ</message></comment>
+<comment><no>5</no><author>Delete</author><mail>Delete</mail><id>null</id><date>2009年11月27日 15時19分34秒</date><message>Delete</message></comment>
+<comment><no>6</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時19分56秒</date><message>テストメッセージ</message><password>7e240de74fb1ed08fa08d38063f6a6a91462a815</password></comment>
+<comment><no>7</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時22分23秒</date><message>テストメッセージ</message></comment>
+<comment><no>8</no><author>Delete</author><mail>Delete</mail><id>null</id><date>2009年11月27日 15時30分4秒</date><message>Delete</message></comment>
+<comment><no>9</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時30分39秒</date><message>テストメッセージ</message></comment>
+<comment><no>10</no><author>Delete</author><mail>Delete</mail><id>null</id><date>2009年11月27日 15時34分45秒</date><message>Delete</message></comment>
+<comment><no>11</no><author>null</author><mail>null</mail><id>null</id><date>2009年11月27日 15時46分49秒</date><message>テストメッセージ</message></comment>
+</topic>
