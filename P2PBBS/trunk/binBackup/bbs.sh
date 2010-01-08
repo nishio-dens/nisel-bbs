@@ -27,4 +27,4 @@ export CLASSPATH
 JVM_OPTION="-Xss80k"
 #JVM_OPTION="-server -Xss80k -Xmx250m"
 
-exec java $JVM_OPTION Main "$@"
+exec java -D$LOGGING_CONFIG $JVM_OPTION Main "$@"

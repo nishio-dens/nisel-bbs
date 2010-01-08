@@ -475,7 +475,9 @@ public class TopicManageNodeUpdater implements Runnable {
 								// 相手の持っているコメント数が自身の管理しているコメント数より多いとき
 								int ihave = topicManager.size(topicID,
 										categoryID);
-								if (numOfComment > ihave) {
+								//TODO もしかしたら以下のコードがうまく動いていないかもしれない
+								//要検討
+								if (numOfComment >= ihave) {
 									//自身は管理ノードではなくなる
 									solve = false;
 									//トピック削除
@@ -483,10 +485,6 @@ public class TopicManageNodeUpdater implements Runnable {
 
 									logger.info("カテゴリ:" + categoryID + " トピック:"
 											+ topicID + "の管理ノードではなくなります．");
-								}else if(numOfComment == ihave) {
-									//相手と自分のコメント数が同じだったら
-									
-									//TODO ここを編集
 								}
 							}
 						}

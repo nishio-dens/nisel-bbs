@@ -1,8 +1,10 @@
 package bbs.gui;
 
+import java.awt.Desktop;
 import java.awt.TrayIcon;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.URI;
 import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
@@ -136,6 +138,16 @@ public class GUIManager {
 				server.start(initNodeAddress, null, globalAddress, port, port);
 				trayIcon.displayMessage("接続成功", "DHTネットワークへの接続に成功しました．",
 						TrayIcon.MessageType.INFO);
+				//ブラウザ起動
+				try {
+					Desktop desktop = Desktop.getDesktop();			 
+					desktop.browse(new URI("http://localhost:" + port + "/read/"));
+				}catch(Exception e2) {
+					JOptionPane.showMessageDialog(null, "ブラウザが起動できませんでした．\n" +
+							"ブラウザを起動してhttp://localhost:" +
+							port + "/read/ へとアクセスしてください．", "Browser Not Found",
+							JOptionPane.ERROR_MESSAGE);
+				}
 			} catch (Exception e2) {
 				JOptionPane.showMessageDialog(null, "エラーが発生しました．" + e2, "Error",
 						JOptionPane.ERROR_MESSAGE);
