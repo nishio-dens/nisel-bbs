@@ -132,8 +132,12 @@ public class GUIManager {
 							"Self Address Error", JOptionPane.ERROR_MESSAGE);
 				}
 				//IPに不正文字が含まれていたら削除
-				globalAddress = globalAddress.replace("\r", "");
-				globalAddress = globalAddress.replace("\n", "");
+				try {
+					globalAddress = globalAddress.replace("\r", "");
+					globalAddress = globalAddress.replace("\n", "");
+				}catch(Exception e2) {
+					e2.printStackTrace();
+				}
 				//P2PBBS起動
 				server.start(initNodeAddress, null, globalAddress, port, port);
 				trayIcon.displayMessage("接続成功", "DHTネットワークへの接続に成功しました．",

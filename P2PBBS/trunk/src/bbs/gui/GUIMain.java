@@ -374,7 +374,7 @@ public class GUIMain {
 	private JTextField getJTextField() {
 		if (jTextField == null) {
 			jTextField = new JTextField();
-			jTextField.setText("bbs.csci.yamanashi.ac.jp");
+			jTextField.setText("bbs.csci.yamanashi.ac.jp:40002");
 		}
 		return jTextField;
 	}
