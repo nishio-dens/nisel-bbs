@@ -234,7 +234,7 @@ public class ClientReadHandler implements HttpHandler {
 				+ " タイトル<input type=\"text\" size=\"40\" name=\"title\" /> <br>\n"
 				+ " 投稿者<input type=\"text\" name=\"author\" />\n"
 				+ " メール<input type=\"text\" name=\"mail\" />\n"
-				+ " パスワード<input type=\"text\" name=\"password\" /> <br>\n"
+				+ " パスワード<input type=\"password\" name=\"password\" /> <br>\n"
 				+ " <input type=\"hidden\" name=\"user\" value=\"true\"/>"
 				+ "<br>\n"
 				+ "<textarea name=\"message\" rows=\"4\" cols=\"60\"></textarea>\n"
@@ -266,7 +266,7 @@ public class ClientReadHandler implements HttpHandler {
 				+ "\"/>\n"
 				+ "投稿者<input type=\"text\" name=\"author\" />\n"
 				+ "メール<input type=\"text\" name=\"mail\" />\n"
-				+ "パスワード<input type=\"text\" name=\"password\" />\n"
+				+ "パスワード<input type=\"password\" name=\"password\" />\n"
 				+ "<br>\n"
 				+ "<textarea name=\"message\" rows=\"4\" cols=\"80\">テストメッセージ</textarea>\n"
 				+ "<br>\n"
@@ -299,7 +299,7 @@ public class ClientReadHandler implements HttpHandler {
 			+ "<input type=\"hidden\" name=\"user\" value=\"true"
 			+ "\"/>\n"
 			+ "削除するコメント番号(1でトピック全体を削除）<input type=\"text\" name=\"no\" />\n"
-			+ "パスワード<input type=\"text\" name=\"password\" /><br>\n"
+			+ "パスワード<input type=\"password\" name=\"password\" /><br>\n"
 			+ "<br>\n"
 			+ "<input type=\"submit\" value=\"削除\" /><br><br>\n";
 	}
