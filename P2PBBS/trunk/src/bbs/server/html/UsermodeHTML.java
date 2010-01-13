@@ -15,7 +15,9 @@ public class UsermodeHTML {
 	 */
 	public static String manageRequestResponse(boolean success) {
 		if (success) {
-			return header() + "トピックの作成に成功しました．戻るボタンで前の画面に戻ってください．<br><br>\n"
+			return header() + "トピックの作成に成功しました．<br>"
+					+ "戻るボタンで前の画面に戻り，更新ボタンを押してください．"
+					+ "<br>書き込み内容が反映されるまで最大30秒ほどかかります．<br><br>\n"
 					+ "<a href=\"javascript:history.back();\">戻る</a>"
 					+ footer();
 		}
@@ -31,7 +33,8 @@ public class UsermodeHTML {
 	 */
 	public static String deleteRequestResponse(boolean success) {
 		if (success) {
-			return header() + "削除に成功しました．戻るボタンで前の画面に戻ってください．<br><br>\n"
+			return header() + "削除に成功しました．戻るボタンで前の画面に戻り，更新ボタンを押してください．"
+					+ "<br>情報が反映されるまで，最大30秒ほどかかります．<br><br>\n"
 					+ "<a href=\"javascript:history.back();\">戻る</a>"
 					+ footer();
 		}
@@ -47,7 +50,8 @@ public class UsermodeHTML {
 	 */
 	public static String writeRequestResponse(boolean success) {
 		if (success) {
-			return header() + "コメントの投稿に成功しました．戻るボタンで前の画面に戻ってください．<br><br>\n"
+			return header() + "コメントの投稿に成功しました．戻るボタンで前の画面に戻り，更新ボタンを押してください．" +
+					"<br>情報が反映されるまで，最大30秒ほどかかります．<br><br>\n"
 					+ "<a href=\"javascript:history.back();\">戻る</a>"
 					+ footer();
 		}
