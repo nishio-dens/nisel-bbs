@@ -15,8 +15,8 @@ import bbs.util.Pair;
  */
 public class TopicManager {
 	private MultiSortedMap< Pair<String, String> , CommentElement> topicData; //key = <トピック固有値, カテゴリID>， value = コメント
-	public static final int maxNumberOfComment = 50; //最大コメント数
-	public static final int maxLengthOfComment = 100; //1コメントあたりの最大文字数
+	public static final int maxNumberOfComment = 500; //最大コメント数
+	public static final int maxLengthOfComment = 300; //1コメントあたりの最大文字数
 	public static final int maxLengthOfAuthor = 30; //作者最大文字数
 	public static final int maxLengthOfMail = 70; //メール最大文字数
 	
