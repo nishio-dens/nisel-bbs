@@ -32,6 +32,7 @@ import bbs.comment.MaxLengthOfCommentException;
 import bbs.comment.MaxLengthOfMailException;
 import bbs.comment.MaxNumberOfCommentException;
 import bbs.comment.TopicManager;
+import bbs.comment.TopicNotFoundException;
 import bbs.dht.DHTManager;
 import bbs.dht.InitDHTException;
 import bbs.http.HttpClientSocket;
@@ -387,30 +388,21 @@ public class BBSManager {
 	 * @param topicID
 	 * @param comment
 	 * @return
+	 * @throws CannotCreateTopicException 
+	 * @throws MaxLengthOfMailException 
+	 * @throws MaxLengthOfAuthorException 
+	 * @throws MaxLengthOfCommentException 
+	 * @throws MaxNumberOfCommentException 
 	 */
-	public boolean manage(String categoryID, String topicID, CommentElement comment) {
+	public void manage(String categoryID, String topicID, CommentElement comment)
+	throws MaxNumberOfCommentException, MaxLengthOfCommentException, MaxLengthOfAuthorException, MaxLengthOfMailException, CannotCreateTopicException {
 		//TODO: IDの決め方を考える
-		boolean accept = false;
 		String id = "testid";
-		try {
-			//トピック作成
-			topicManager.createTopic(topicID, categoryID, comment.getAuthor(), comment.getMailAddress(),
-					id, comment.getMessage(), comment.getTitle(), comment.getPassword());
-			//トピック管理ノード情報アップデート
-			topicUpdater.update(categoryID, topicID);
-			accept = true;
-		} catch (MaxNumberOfCommentException e) {
-			e.printStackTrace();
-		} catch (MaxLengthOfCommentException e) {
-			e.printStackTrace();
-		} catch (MaxLengthOfAuthorException e) {
-			e.printStackTrace();
-		} catch (MaxLengthOfMailException e) {
-			e.printStackTrace();
-		} catch (CannotCreateTopicException e) {
-			e.printStackTrace();
-		}
-		return accept;
+		//トピック作成
+		topicManager.createTopic(topicID, categoryID, comment.getAuthor(), comment.getMailAddress(),
+				id, comment.getMessage(), comment.getTitle(), comment.getPassword());
+		//トピック管理ノード情報アップデート
+		topicUpdater.update(categoryID, topicID);
 	}
 	
 	/**
@@ -633,64 +625,89 @@ public class BBSManager {
 		}
 		return buf.toString();
 	}
-	
+
 	/**
 	 * ネットワーク上にあるトピックにコメントを書き込む
+	 * 
 	 * @param categoryID
 	 * @param topicID
 	 * @param comment
 	 * @param password
 	 * @return
+	 * @throws TopicNotFoundException
+	 * @throws MaxLengthOfMailException
+	 * @throws MaxLengthOfAuthorException
+	 * @throws MaxLengthOfCommentException
+	 * @throws MaxNumberOfCommentException
 	 */
-	public boolean write(String categoryID, String topicID, CommentElement comment, String password) {
+	public boolean write(String categoryID, String topicID,
+			CommentElement comment, String password)
+			throws MaxNumberOfCommentException, MaxLengthOfCommentException,
+			MaxLengthOfAuthorException, MaxLengthOfMailException,
+			TopicNotFoundException {
 		// 自分自身がトピック管理ノードだった場合
-		try {
-			if (isManage(categoryID, topicID)) {
-				// コメント追加
-				this.topicManager.add(topicID, categoryID, comment.getAuthor(),
-						comment.getMailAddress(), comment.getId(), comment.getMessage(), comment.getPassword());
-				//TODO:ここを入れるとうまく動かない たぶん同時に接続が起こるから
-				//this.topicUpdater.update(categoryID, topicID);
-				//書き込み成功
-				return true;
-			}else {
-				//DHTから管理ノード取得
+		if (isManage(categoryID, topicID)) {
+			// コメント追加
+			this.topicManager.add(topicID, categoryID, comment.getAuthor(),
+					comment.getMailAddress(), comment.getId(), comment
+							.getMessage(), comment.getPassword());
+			// TODO:ここを入れるとうまく動かない たぶん同時に接続が起こるから
+			// this.topicUpdater.update(categoryID, topicID);
+			// 書き込み成功
+			return true;
+		} else {
+			try {
+				// DHTから管理ノード取得
 				SortedMap<Long, String> manageNodes = this.dhtManager
 						.getTTLValuePair(categoryID + topicID);
-				//もっともTTLの大きなValueを取得
-				//ぬるぽ対策
-				if( manageNodes == null || manageNodes.size() == 0) {
-					//manage node not found.
-				}else {
-					String manageNodeInfo = manageNodes.get( manageNodes.firstKey() );
-					//管理ノードのアドレス取得
-					String manageNodeAddress = 
-						BBSXMLParser.manageNodeXMLToIPAddress("<manage>" + manageNodeInfo + "</manage>").get(0);
-					
-					//管理ノードにデータ書き込み
-					//bodyを再び生成
-					String body = "category=" + URLEncoder.encode(categoryID, DEFAULT_ENCODING)
-							+ "&topic="  + URLEncoder.encode(topicID, DEFAULT_ENCODING) 
-							+ "&author=" + URLEncoder.encode(comment.getAuthor(), DEFAULT_ENCODING) 
-							+ "&mail="   + URLEncoder.encode(comment.getMailAddress(), DEFAULT_ENCODING)
-							+ "&message="+ URLEncoder.encode(comment.getMessage(), DEFAULT_ENCODING) 
-							+ "&password=" + URLEncoder.encode(password, DEFAULT_ENCODING) + "\n";
-					//管理ノードに送信
+				// もっともTTLの大きなValueを取得
+				// ぬるぽ対策
+				if (manageNodes == null || manageNodes.size() == 0) {
+					// manage node not found.
+				} else {
+					String manageNodeInfo = manageNodes.get(manageNodes
+							.firstKey());
+					// 管理ノードのアドレス取得
+					String manageNodeAddress = BBSXMLParser
+							.manageNodeXMLToIPAddress(
+									"<manage>" + manageNodeInfo + "</manage>")
+							.get(0);
+
+					// 管理ノードにデータ書き込み
+					// bodyを再び生成
+					String body = "category="
+							+ URLEncoder.encode(categoryID, DEFAULT_ENCODING)
+							+ "&topic="
+							+ URLEncoder.encode(topicID, DEFAULT_ENCODING)
+							+ "&author="
+							+ URLEncoder.encode(comment.getAuthor(),
+									DEFAULT_ENCODING)
+							+ "&mail="
+							+ URLEncoder.encode(comment.getMailAddress(),
+									DEFAULT_ENCODING)
+							+ "&message="
+							+ URLEncoder.encode(comment.getMessage(),
+									DEFAULT_ENCODING) + "&password="
+							+ URLEncoder.encode(password, DEFAULT_ENCODING)
+							+ "\n";
+					// 管理ノードに送信
 					HttpClientSocket sock = new HttpClientSocket();
 					String receive = sock.sendAndReceive("http://"
-							+ manageNodeAddress + "/command/write/", "POST", body);
-					//String receive = 
-					//	sock.sendAndReceive("/command/write/", "127.0.0.1", 3997, "POST", body);
-					if( receive.startsWith("ACCEPT") ) {
+							+ manageNodeAddress + "/command/write/", "POST",
+							body);
+					// String receive =
+					// sock.sendAndReceive("/command/write/", "127.0.0.1", 3997,
+					// "POST", body);
+					if (receive.startsWith("ACCEPT")) {
 						return true;
 					}
 				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+
+			return false;
 		}
-		return false;
 	}
-	
-	
 }

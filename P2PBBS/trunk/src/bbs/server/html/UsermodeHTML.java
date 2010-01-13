@@ -25,6 +25,18 @@ public class UsermodeHTML {
 				+ "<br>戻るボタンで前の画面に戻ってください．<br><br>\n"
 				+ "<a href=\"javascript:history.back();\">戻る</a>" + footer();
 	}
+	
+
+	/**
+	 * トピック管理依頼のエラーを取得
+	 * @param message
+	 * @return
+	 */
+	public static String manageRequestErrorMessage(String message) {
+		return header() + message + "<br>書き込んだ内容をもう一度よく確認してください．"
+		+ "<br>戻るボタンで前の画面に戻ってください．<br><br>\n"
+		+ "<a href=\"javascript:history.back();\">戻る</a>" + footer();
+	}
 
 	/**
 	 * トピックまたはコメント削除に失敗した場合

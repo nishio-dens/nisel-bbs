@@ -9,7 +9,12 @@ import java.net.URLDecoder;
 import java.util.logging.Logger;
 
 import bbs.BBSConfiguration;
+import bbs.comment.CannotCreateTopicException;
 import bbs.comment.CommentElement;
+import bbs.comment.MaxLengthOfAuthorException;
+import bbs.comment.MaxLengthOfCommentException;
+import bbs.comment.MaxLengthOfMailException;
+import bbs.comment.MaxNumberOfCommentException;
 import bbs.manager.BBSManager;
 import bbs.monitor.MonitorManager;
 import bbs.server.html.UsermodeHTML;
@@ -128,36 +133,67 @@ public class ManageHandler implements HttpHandler {
 						"MANAGE");
 
 				//トピック作成
-				boolean res = manager.manage(categoryID, topicID, commentElem);
+				manager.manage(categoryID, topicID, commentElem);
 				if( userMode ) {
-					if( res ) {
-						//要求受付を完了したことを知らせる
-						String tmp = UsermodeHTML.manageRequestResponse(true);
-						response = tmp.getBytes(DEFAULT_CHARACTER_ENCODING);
-						responseCode = 200;
-					}else {
-						// 何らかの理由で書き込みに失敗した時
-						response = UsermodeHTML.manageRequestResponse(false)
-								.getBytes(DEFAULT_CHARACTER_ENCODING);
-						responseCode = 200;
-					}
+					//要求受付を完了したことを知らせる
+					String tmp = UsermodeHTML.manageRequestResponse(true);
+					response = tmp.getBytes(DEFAULT_CHARACTER_ENCODING);
+					responseCode = 200;
 				}else {
-					if( res ) {
-						//要求受付を完了したことを知らせる
-						String tmp = "ACCEPT category: " + categoryID + " topic: " + topicID;
-						response = tmp.getBytes();
-						responseCode = 200;
-					}else {
-						//何らかの理由で書き込みに失敗した時
-						response = "REJECT".getBytes();
-						responseCode = 200;
-					}
+					//要求受付を完了したことを知らせる
+					String tmp = "ACCEPT category: " + categoryID + " topic: " + topicID;
+					response = tmp.getBytes();
+					responseCode = 200;
 				}
 				logger.info("manage request from " + he.getRemoteAddress().getAddress().getHostAddress() +
 						" category: " + categoryID + " topic: " + topicID);
 			}else {
 				throw new Exception("Bad request.");
 			}
+		} catch (MaxLengthOfCommentException e) {
+			e.printStackTrace();
+			//間違った要求 400 Bad Request
+			responseCode = 400;
+			if( userMode ) {
+				response = UsermodeHTML.manageRequestErrorMessage("1コメントあたりの文字数が多すぎます.")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			}else {
+				response = "Bad manage Request".getBytes();
+			}
+			logger.info("Bad manage Request from " + he.getRemoteAddress().getAddress().getHostAddress());
+		} catch (MaxLengthOfAuthorException e) {
+			e.printStackTrace();
+			//間違った要求 400 Bad Request
+			responseCode = 400;
+			if( userMode ) {
+				response = UsermodeHTML.manageRequestErrorMessage("投稿者の名前が長すぎます．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			}else {
+				response = "Bad manage Request".getBytes();
+			}
+			logger.info("Bad manage Request from " + he.getRemoteAddress().getAddress().getHostAddress());
+		} catch (MaxLengthOfMailException e) {
+			e.printStackTrace();
+			//間違った要求 400 Bad Request
+			responseCode = 400;
+			if( userMode ) {
+				response = UsermodeHTML.manageRequestErrorMessage("メールアドレスが長すぎます．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			}else {
+				response = "Bad manage Request".getBytes();
+			}
+			logger.info("Bad manage Request from " + he.getRemoteAddress().getAddress().getHostAddress());
+		} catch (CannotCreateTopicException e) {
+			e.printStackTrace();
+			//間違った要求 400 Bad Request
+			responseCode = 400;
+			if( userMode ) {
+				response = UsermodeHTML.manageRequestErrorMessage("トピックの数が多すぎて作成できませんでした．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			}else {
+				response = "Bad manage Request".getBytes();
+			}
+			logger.info("Bad manage Request from " + he.getRemoteAddress().getAddress().getHostAddress());
 		} catch (Exception e) {
 			e.printStackTrace();
 			//間違った要求 400 Bad Request

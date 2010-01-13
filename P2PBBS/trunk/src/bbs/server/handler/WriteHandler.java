@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 
 import bbs.BBSConfiguration;
 import bbs.comment.CommentElement;
+import bbs.comment.MaxLengthOfAuthorException;
+import bbs.comment.MaxLengthOfCommentException;
+import bbs.comment.MaxLengthOfMailException;
+import bbs.comment.MaxNumberOfCommentException;
+import bbs.comment.TopicNotFoundException;
 import bbs.manager.BBSManager;
 import bbs.monitor.MonitorManager;
 import bbs.server.html.UsermodeHTML;
@@ -165,7 +170,67 @@ public class WriteHandler implements HttpHandler {
 			}else {
 				throw new Exception("Bad request.");
 			}
-		} catch (Exception e) {
+		} catch (MaxNumberOfCommentException e) {
+			e.printStackTrace();
+			// 間違った要求 400 Bad Request
+			responseCode = 400;
+			if (userMode) {
+				responseBody = UsermodeHTML.manageRequestErrorMessage("トピックへこれ以上書き込めません．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			} else {
+				responseBody = "Bad write Request.".getBytes();
+				logger.info("Bad write Request from "
+						+ he.getRemoteAddress().getAddress().getHostAddress());
+			}
+		} catch (MaxLengthOfCommentException e) {
+			e.printStackTrace();
+			// 間違った要求 400 Bad Request
+			responseCode = 400;
+			if (userMode) {
+				responseBody = UsermodeHTML.manageRequestErrorMessage("1コメントあたりの文字数が長すぎます．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			} else {
+				responseBody = "Bad write Request.".getBytes();
+				logger.info("Bad write Request from "
+						+ he.getRemoteAddress().getAddress().getHostAddress());
+			}
+		} catch (MaxLengthOfAuthorException e) {
+			e.printStackTrace();
+			// 間違った要求 400 Bad Request
+			responseCode = 400;
+			if (userMode) {
+				responseBody = UsermodeHTML.manageRequestErrorMessage("作者名が長すぎます．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			} else {
+				responseBody = "Bad write Request.".getBytes();
+				logger.info("Bad write Request from "
+						+ he.getRemoteAddress().getAddress().getHostAddress());
+			}
+		} catch (MaxLengthOfMailException e) {
+			e.printStackTrace();
+			// 間違った要求 400 Bad Request
+			responseCode = 400;
+			if (userMode) {
+				responseBody = UsermodeHTML.manageRequestErrorMessage("メールアドレスが長すぎます．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			} else {
+				responseBody = "Bad write Request.".getBytes();
+				logger.info("Bad write Request from "
+						+ he.getRemoteAddress().getAddress().getHostAddress());
+			}
+		} catch (TopicNotFoundException e) {
+			e.printStackTrace();
+			// 間違った要求 400 Bad Request
+			responseCode = 400;
+			if (userMode) {
+				responseBody = UsermodeHTML.manageRequestErrorMessage("該当トピックが見つかりませんでした．")
+					.getBytes(DEFAULT_CHARACTER_ENCODING);
+			} else {
+				responseBody = "Bad write Request.".getBytes();
+				logger.info("Bad write Request from "
+						+ he.getRemoteAddress().getAddress().getHostAddress());
+			}
+		}catch (Exception e) {
 			e.printStackTrace();
 			if (userMode) {
 				responseCode = 400;
@@ -181,6 +246,7 @@ public class WriteHandler implements HttpHandler {
 						+ he.getRemoteAddress().getAddress().getHostAddress());
 			}
 		}
+		
 		// response Header
 		he.sendResponseHeaders(responseCode, responseBody.length);
 		// body 送信
