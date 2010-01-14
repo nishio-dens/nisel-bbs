@@ -170,9 +170,9 @@ public class ClientReadHandler implements HttpHandler {
 					+ comment.getDate()
 					+ " ID: "
 					+ comment.getId()
-					+ "<br></dt>\n<dd><br>\n"
+					+ "<br></dt>\n<dd><br>\n"									
 					+ bbs.util.HTMLEncode.replaceSpace(bbs.util.HTMLEncode
-							.replaceNewline(comment.getMessage()))
+							.replaceNewline( bbs.util.HTMLEncode.replaceURL(comment.getMessage())))
 					+ "\n</dd><br><br>\n";
 			buf.append(buf2);
 			if( title == null && comment.getTitle() != null ) {

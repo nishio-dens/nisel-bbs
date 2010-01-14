@@ -28,26 +28,27 @@ import bbs.xml.BBSXMLParser;
 
 
 public class TestDriver2 {
-	/*public static void main(String[] args) {
-		new TestDriver2().main2();
-	}
-	public void main2() {
-		try {
-			new TestServer().start();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-	
 	public static void main(String[] args) {
 		new TestDriver2().main2();
 	}
+	
+	public static final String testMessage = "aaa http://test.com/ HELLOWORLD HELLO2WORLDhttp://bbs.com/index.htmlです";
 	public void main2() {
 		try {
-			new PolarisServer();
+			//URL
+			Pattern pattern = Pattern.compile("(http://|https://){1}[\\w\\.\\-/:]+");
+			Matcher matcher = pattern.matcher( testMessage.toString() );
+			StringBuffer sb = new StringBuffer();
+			int lastnum = 0;
+			while( matcher.find() ) {
+				matcher.appendReplacement(sb, "<a href=\"" + matcher.group() 
+						+ "\">" + matcher.group() + "</a>");
+				lastnum = matcher.end();
+				System.out.println("LASTNUM:" + lastnum);
+			}
+			System.out.println(sb.toString() + "\n======\n" + testMessage.substring(lastnum));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 }

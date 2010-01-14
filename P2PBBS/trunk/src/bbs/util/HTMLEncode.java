@@ -1,5 +1,8 @@
 package bbs.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import bbs.BBSConfiguration;
 
 /**
@@ -68,6 +71,26 @@ public class HTMLEncode {
 		String buf = data.replaceAll(" ", "&nbsp;&nbsp;");
 		buf = data.replaceAll("\t","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
 		return buf;
+	}
+	
+	/**
+	 * URLを<a href>のリンクへと変換する
+	 * @param data
+	 * @return
+	 */
+	public static String replaceURL(String data) {
+		// URL
+		Pattern pattern = Pattern
+				.compile("(http://|https://){1}[\\w\\.\\-/:]+");
+		Matcher matcher = pattern.matcher(data);
+		StringBuffer sb = new StringBuffer();
+		int lastnum = 0;
+		while (matcher.find()) {
+			matcher.appendReplacement(sb, "<a href=\"" + matcher.group()
+					+ "\">" + matcher.group() + "</a>");
+			lastnum = matcher.end();
+		}
+		return sb.toString() + data.substring(lastnum);
 	}
 }
 
