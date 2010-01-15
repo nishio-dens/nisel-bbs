@@ -37,6 +37,7 @@ import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
+import bbs.BBSConfiguration;
 import bbs.server.BBSServer;
 
 import polaris.upnp.UPnPManager;
@@ -73,6 +74,8 @@ public class GUIMain {
 	private JButton jButton1 = null;
 	private JLabel jLabel3 = null;
 	GUIManager guiManager = null;
+	private JLabel jLabel4 = null;
+	private JTextField jTextField3 = null;
 	/**
 	 * This method initializes jFrame
 	 *
@@ -84,9 +87,9 @@ public class GUIMain {
 			jFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 			jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage("/resources/P2PBBS.png"));
 			jFrame.setJMenuBar(getJJMenuBar());
-			jFrame.setSize(545, 236);
+			jFrame.setSize(545, 247);
 			jFrame.setContentPane(getJContentPane());
-			jFrame.setTitle("P2PBBS");
+			jFrame.setTitle("Nisel BBS");
 			//トレイ関係
 			systemTray = SystemTray.getSystemTray();
 			Image image = null;
@@ -138,28 +141,45 @@ public class GUIMain {
 	 */
 	private JPanel getJContentPane() {
 		if (jContentPane == null) {
+			GridBagConstraints gridBagConstraints11 = new GridBagConstraints();
+			gridBagConstraints11.fill = GridBagConstraints.VERTICAL;
+			gridBagConstraints11.gridwidth = 3;
+			gridBagConstraints11.gridx = 1;
+			gridBagConstraints11.gridy = 3;
+			gridBagConstraints11.ipadx = 312;
+			gridBagConstraints11.ipady = 1;
+			gridBagConstraints11.weightx = 1.0;
+			gridBagConstraints11.insets = new Insets(4, 4, 5, 16);
+			GridBagConstraints gridBagConstraints10 = new GridBagConstraints();
+			gridBagConstraints10.insets = new Insets(4, 15, 4, 3);
+			gridBagConstraints10.gridy = 3;
+			gridBagConstraints10.ipadx = 24;
+			gridBagConstraints10.ipady = 6;
+			gridBagConstraints10.anchor = GridBagConstraints.WEST;
+			gridBagConstraints10.gridx = 0;
 			GridBagConstraints gridBagConstraints9 = new GridBagConstraints();
-			gridBagConstraints9.insets = new Insets(3, 6, 3, 3);
+			gridBagConstraints9.insets = new Insets(5, 5, 3, 4);
 			gridBagConstraints9.gridx = 0;
 			gridBagConstraints9.gridy = 5;
 			gridBagConstraints9.ipadx = 504;
+			gridBagConstraints9.anchor = GridBagConstraints.WEST;
 			gridBagConstraints9.gridwidth = 4;
 			GridBagConstraints gridBagConstraints8 = new GridBagConstraints();
-			gridBagConstraints8.insets = new Insets(1, 7, 2, 18);
+			gridBagConstraints8.insets = new Insets(5, 6, 5, 20);
 			gridBagConstraints8.gridy = 4;
 			gridBagConstraints8.ipadx = 52;
 			gridBagConstraints8.ipady = 7;
 			gridBagConstraints8.gridx = 3;
 			GridBagConstraints gridBagConstraints7 = new GridBagConstraints();
-			gridBagConstraints7.insets = new Insets(1, 4, 2, 7);
+			gridBagConstraints7.insets = new Insets(5, 5, 5, 6);
 			gridBagConstraints7.gridy = 4;
 			gridBagConstraints7.ipadx = 52;
 			gridBagConstraints7.ipady = 7;
 			gridBagConstraints7.gridx = 2;
 			GridBagConstraints gridBagConstraints6 = new GridBagConstraints();
-			gridBagConstraints6.insets = new Insets(5, 14, 0, 4);
+			gridBagConstraints6.insets = new Insets(4, 12, 18, 5);
 			gridBagConstraints6.gridx = 0;
-			gridBagConstraints6.gridy = 3;
+			gridBagConstraints6.gridy = 4;
 			gridBagConstraints6.ipadx = 108;
 			gridBagConstraints6.ipady = -3;
 			gridBagConstraints6.gridwidth = 2;
@@ -168,16 +188,16 @@ public class GUIMain {
 			gridBagConstraints5.gridwidth = 3;
 			gridBagConstraints5.gridx = 1;
 			gridBagConstraints5.gridy = 2;
-			gridBagConstraints5.ipadx = 369;
+			gridBagConstraints5.ipadx = 329;
 			gridBagConstraints5.ipady = 1;
 			gridBagConstraints5.weightx = 1.0;
-			gridBagConstraints5.insets = new Insets(3, 4, 5, 16);
+			gridBagConstraints5.insets = new Insets(3, 4, 4, 16);
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 			gridBagConstraints4.fill = GridBagConstraints.VERTICAL;
 			gridBagConstraints4.gridwidth = 3;
 			gridBagConstraints4.gridx = 1;
 			gridBagConstraints4.gridy = 1;
-			gridBagConstraints4.ipadx = 369;
+			gridBagConstraints4.ipadx = 269;
 			gridBagConstraints4.ipady = 1;
 			gridBagConstraints4.weightx = 1.0;
 			gridBagConstraints4.insets = new Insets(4, 4, 5, 16);
@@ -195,19 +215,24 @@ public class GUIMain {
 			gridBagConstraints2.gridy = 1;
 			gridBagConstraints2.ipadx = 11;
 			gridBagConstraints2.ipady = 6;
+			gridBagConstraints2.anchor = GridBagConstraints.WEST;
 			gridBagConstraints2.gridx = 0;
 			GridBagConstraints gridBagConstraints1 = new GridBagConstraints();
 			gridBagConstraints1.insets = new Insets(11, 15, 4, 3);
 			gridBagConstraints1.gridy = 0;
 			gridBagConstraints1.ipadx = 89;
 			gridBagConstraints1.ipady = 6;
+			gridBagConstraints1.anchor = GridBagConstraints.WEST;
 			gridBagConstraints1.gridx = 0;
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
-			gridBagConstraints.insets = new Insets(3, 15, 4, 3);
+			gridBagConstraints.insets = new Insets(3, 15, 3, 3);
 			gridBagConstraints.gridy = 2;
 			gridBagConstraints.ipadx = 11;
 			gridBagConstraints.ipady = 6;
+			gridBagConstraints.anchor = GridBagConstraints.WEST;
 			gridBagConstraints.gridx = 0;
+			jLabel4 = new JLabel();
+			jLabel4.setText("ブラウザアドレス");
 			jLabel3 = new JLabel();
 			jLabel3.setDisplayedMnemonic(KeyEvent.VK_UNDEFINED);
 			jLabel3.setText("情報");
@@ -232,6 +257,8 @@ public class GUIMain {
 			jContentPane.add(getJButton(), gridBagConstraints7);
 			jContentPane.add(getJButton1(), gridBagConstraints8);
 			jContentPane.add(jLabel3, gridBagConstraints9);
+			jContentPane.add(jLabel4, gridBagConstraints10);
+			jContentPane.add(getJTextField3(), gridBagConstraints11);
 		}
 		return jContentPane;
 	}
@@ -360,7 +387,7 @@ public class GUIMain {
 	private JLabel getAboutVersionLabel() {
 		if (aboutVersionLabel == null) {
 			aboutVersionLabel = new JLabel();
-			aboutVersionLabel.setText("Version 1.0");
+			aboutVersionLabel.setText("Nisel BBS Version 0.7");
 			aboutVersionLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		return aboutVersionLabel;
@@ -438,6 +465,9 @@ public class GUIMain {
 					if( guiManager == null ) {
 						guiManager = new GUIManager(trayIcon, getJFrame(), jLabel3);
 					}
+					if( jTextField3.getText() != null ) {
+						BBSConfiguration.setGATEWAY_ADDRESS(jTextField3.getText());
+					}
 					guiManager.start(jTextField.getText(), jTextField1
 							.getText(), jTextField2.getText(), jCheckBox
 							.isSelected());
@@ -466,6 +496,19 @@ public class GUIMain {
 			});
 		}
 		return jButton1;
+	}
+
+	/**
+	 * This method initializes jTextField3	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextField3() {
+		if (jTextField3 == null) {
+			jTextField3 = new JTextField();
+			jTextField3.setText("localhost");
+		}
+		return jTextField3;
 	}
 
 	/**

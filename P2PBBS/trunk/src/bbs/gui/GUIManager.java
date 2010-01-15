@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import bbs.BBSConfiguration;
 import bbs.http.HttpClientSocket;
 import bbs.server.BBSServer;
 
@@ -145,10 +146,10 @@ public class GUIManager {
 				//ブラウザ起動
 				try {
 					Desktop desktop = Desktop.getDesktop();			 
-					desktop.browse(new URI("http://localhost:" + port + "/read/"));
+					desktop.browse(new URI("http://" + BBSConfiguration.GATEWAY_ADDRESS + ":" + port + "/read/"));
 				}catch(Exception e2) {
 					JOptionPane.showMessageDialog(null, "ブラウザが起動できませんでした．\n" +
-							"ブラウザを起動してhttp://localhost:" +
+							"ブラウザを起動してhttp://" + BBSConfiguration.GATEWAY_ADDRESS + ":" +
 							port + "/read/ へとアクセスしてください．", "Browser Not Found",
 							JOptionPane.ERROR_MESSAGE);
 				}
