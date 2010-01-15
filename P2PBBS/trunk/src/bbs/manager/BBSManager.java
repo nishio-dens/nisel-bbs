@@ -310,7 +310,7 @@ public class BBSManager {
 		for( String topic : topics ) {
 			//トピックIDはかならず40文字 + 4文字
 			if( topic.length() == 40 + 4) {
-				buf.append( topic + "\n");
+				buf.append( topic.substring(0, 40) + "\n");
 			}
 		}
 		return buf.toString();

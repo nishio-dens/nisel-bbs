@@ -91,7 +91,40 @@ public class ClientReadHandler implements HttpHandler {
 							+ createDeleteCommentForm(categoryID, topicID)
 							+ createHistoryBack() ) ).getBytes( DEFAULT_ENCODING );
 				}
+				
 
+			}else if( splitStr.length == 4 ) {
+				//トピック取得
+				String local = splitStr[2];
+				String categoryID = splitStr[3];
+				if( local.equals("local")) {
+					//過去ログ取得
+					String str = manager.getLocal(categoryID);
+					String[] topics = str.split("\r\n|\n");
+					//存在しないカテゴリ
+					if( topics == null || topics[0].startsWith("Not Found")) {
+						//トピックが見つからない
+						responseCode = 404;
+						response = createHTML(
+								createCategoryList()
+										+ createMainContents(createTopicHeader(categoryID)
+												+ createExplain()
+												+ createTopicNotFound()
+												+ createTopicPostForm(categoryID)))
+								.getBytes(DEFAULT_ENCODING);
+					}else {
+						//トピックが見つかった時
+						responseCode = 200;
+						//response = createHTML( createTopicList(topics, categoryID) ).getBytes( DEFAULT_ENCODING );
+						response = createHTML(
+								createCategoryList()
+										+ createMainContents(createTopicHeader(categoryID)
+												+ createExplain()
+												+ createLocalTopicList(topics,
+														categoryID)))
+								.getBytes(DEFAULT_ENCODING);
+					}
+				}				
 			}else if( splitStr.length == 3 ) {
 				//トピック一覧取得
 				String readData = null;
@@ -342,6 +375,45 @@ public class ClientReadHandler implements HttpHandler {
 			buf.append("<td>未実装</td>");
 			buf.append("<td>" + topic.getNumOfComment() + "</td>\n");
 			buf.append("<td>" + df.format((double)topic.getActivity() / 120.0) + "回/時</td>");
+			buf.append("</tr>");
+			i++;
+		}
+		buf.append("</tbody>\n");
+		buf.append("</table></div></div></div>\n");
+		buf.append("");
+		return buf.toString();
+	}
+	
+	/**
+	 * ローカルトピック一覧
+	 * @param topics
+	 * @return
+	 */
+	private String createLocalTopicList(String[] topics, String categoryID) {
+		StringBuffer buf = new StringBuffer("");
+		buf.append( ""
+                   + "<div id=\"box\">"
+                   + "<h3>過去のトピック一覧</h3>");
+		buf.append("<div id=\"ListTable\">" + "<div id=\"ListTableIn\">"
+				+ "<table>" + "<tbody>" + "<tr>" + "<th>No</th>"
+				+ "<th>トピックID</th>" + "<th>作成者</th>" + ""
+				+ "" + "</tr>");
+		int i = 1;
+		DecimalFormat df = new DecimalFormat("0.000");
+		for(String topic : topics) {
+			if( i % 2 == 0 ) {
+				buf.append("<tr class=\"TableOdd\">\n");
+			}else {
+				buf.append("<tr class=\"TableEven\">\n");
+			}
+			buf.append("<td>" + i + "</td>\n");
+			buf.append("<td><a href=\"http://" + GATEWAY_ADDRESS + ":" + port + "/read/"
+					+ categoryID + "/" + topic + "/0-0\">");
+			buf.append(HTMLEncode.encode(topic));
+			buf.append("</a></td>\n");
+			buf.append("");
+			buf.append("\n");
+			buf.append("<td>" + "未実装" + "</td>");
 			buf.append("</tr>");
 			i++;
 		}
