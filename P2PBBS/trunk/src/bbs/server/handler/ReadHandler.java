@@ -34,7 +34,7 @@ public class ReadHandler implements HttpHandler {
 		
 		//command have カテゴリ識別子 トピック識別子へと分解
 		try {
-			//受信データログ記録
+			//受信データログ記録 自分からの要求なのでデータ受信量は0
 			monitorManager.addMessageLog("TOPIC_RECEIVE",
 					he.getRemoteAddress().getAddress().getHostAddress()
 					+ ":" + he.getRemoteAddress().getPort(), path.length(),

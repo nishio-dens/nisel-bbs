@@ -59,7 +59,7 @@ public class GetHandler implements HttpHandler {
 				//受信データログ記録
 				monitorManager.addMessageLog("TOPIC_RECEIVE",
 						he.getRemoteAddress().getAddress().getHostAddress()
-						+ ":" + he.getRemoteAddress().getPort(), 0,
+						+ ":" + he.getRemoteAddress().getPort(), path.length(),
 						"GET");
 
 				//response 200 OK

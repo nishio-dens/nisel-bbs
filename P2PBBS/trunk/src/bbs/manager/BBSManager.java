@@ -534,10 +534,17 @@ public class BBSManager {
 							// 管理ノードに送信
 							HttpClientSocket sock = new HttpClientSocket();
 							try {
+								//要求データログ記録
+								monitorManager.addMessageLog("TOPIC_SEND", access, 0, "GET");
+								
 								receive = sock.sendAndReceive("http://" + access
 										+ "/command/get/" + categoryID + "/"
 										+ topicID + "/" + getCommentStartNo + "-"
 										+ commentEndNo, "GET", "");
+								
+								//受信データログ記録
+								monitorManager.addMessageLog("TOPIC_RECEIVE",
+										access, receive.length(), "GET");
 							} catch (Exception e) {
 								// 接続失敗 無視
 							}
@@ -560,10 +567,17 @@ public class BBSManager {
 								// 管理ノードに送信
 								HttpClientSocket sock = new HttpClientSocket();
 								try {
+									//要求データログ記録
+									monitorManager.addMessageLog("TOPIC_SEND", access, 0, "GET");
+									
 									receive = sock.sendAndReceive("http://" + access
 											+ "/command/get/" + categoryID + "/"
 											+ topicID + "/0-"
 											+ commentEndNo, "GET", "");
+									
+									//受信データログ記録
+									monitorManager.addMessageLog("TOPIC_RECEIVE",
+											access, receive.getBytes(DEFAULT_ENCODING).length, "GET");
 								} catch (Exception e) {
 									// 接続失敗 無視
 								}

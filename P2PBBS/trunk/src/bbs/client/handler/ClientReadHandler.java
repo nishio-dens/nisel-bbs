@@ -36,6 +36,8 @@ public class ClientReadHandler implements HttpHandler {
 	private static final String DEFAULT_ENCODING = BBSConfiguration.DEFAULT_ENCODING;
 	//ゲートウェイ
 	private static final String GATEWAY_ADDRESS = BBSConfiguration.GATEWAY_ADDRESS;
+	//ネットワークログ
+	private MonitorManager monitorManager = MonitorManager.getMonitorManager();
 
 	/**
 	 *
@@ -61,6 +63,12 @@ public class ClientReadHandler implements HttpHandler {
 
 		//read カテゴリ識別子 トピック識別子へと分解
 		try {
+			//受信データログ記録 自分からの要求なので受信量は0
+			monitorManager.addMessageLog("TOPIC_RECEIVE",
+					he.getRemoteAddress().getAddress().getHostAddress()
+					+ ":" + he.getRemoteAddress().getPort(), 0,
+					"READ");
+			
 			if( splitStr.length == 5 ) {
 				//トピック取得
 				String categoryID = splitStr[2];
@@ -172,6 +180,11 @@ public class ClientReadHandler implements HttpHandler {
 		}catch(Exception e) {
 			//無視
 		}
+		//送信データログ記録 自分からの要求なので送信量も0
+		monitorManager.addMessageLog("TOPIC_SEND",
+				he.getRemoteAddress().getAddress().getHostAddress()
+				+ ":" + he.getRemoteAddress().getPort(), 0,
+				"READ");
 		//ヘッダ送信
 		he.sendResponseHeaders(responseCode, response.length);
 		//データ送信
@@ -379,7 +392,7 @@ public class ClientReadHandler implements HttpHandler {
 			i++;
 		}
 		buf.append("</tbody>\n");
-		buf.append("</table></div></div></div>\n");
+		buf.append("</table></div></div>" +  "</div>\n");
 		buf.append("");
 		return buf.toString();
 	}
