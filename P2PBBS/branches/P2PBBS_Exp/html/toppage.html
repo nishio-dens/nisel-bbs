@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+  <title>P2PBBS</title>
+  <style>
+<!--
+* {margin:0; padding:0;}
+body {margin:0; padding:0; overflow:hidden;}
+div#leftbox {margin:0; padding:0; height:100%; width:150px; position:absolute; left:0; top:0;background-color:#F8F8FF}
+div#mainbox {margin:0 0 0 10em; padding:0; height:100%; overflow:auto;background-color:#FFFFFF}
+
+div#header{width:100%;margin:0 0 1em 0;text-align:left;background-color:#FFFFFF}
+div#footer{clear:both;width:100%;margin:5em 0 1em 0;text-align:left;}
+div#box{background-color:#FFFFFF}
+
+/* テーブル奇数*/
+.TableEven {
+background-color: #f7f7f7;
+}
+.TableOdd {
+background-color: #fcfcfc;
+}
+/* テーブル一覧関係 */
+#ListTable {
+clear: both;
+margin: 10px 25px 10px 25px;
+}
+#ListTableIn {
+width: 100%;
+}
+#ListTableIn table {
+width: 100%;
+}
+#ListTableIn th {
+padding: 5px;
+background-color: #336699;
+color: #ffffff;
+white-space: nowrap;
+}
+#ListTableIn td {
+padding: 5px;
+}
+-->
+  </style>
+</head>
+<body>
+<div id="leftbox">
+<h3>カテゴリ一覧</h3>
+<div style="text-align: left; margin-left: 10px;">
+<a href="test">テストカテゴリ1</a><br>
+<a href="test">テストカテゴリ2</a><br>
+<a href="test">テストカテゴリ3</a></div>
+</div>
+<div id="mainbox">
+<div id="header">
+<h2>
+<center>P2PBBS<br>
+</center>
+</h2>
+</div>
+<div id="box">
+<p><span style="color: rgb(255, 0, 0); font-weight: bold;">本システムを利用する前に必
+ず読んでください
+<br>
+<br>
+</span></p>
+<li>本システムはテスト段階のプログラムです．信頼性，完全性については一切保証しておりません．</li>
+<li>本システムを利用したことにより，利用者が何らかの損害，不利益を被った場合でも，製作者はその責任を一切負いません．</li>
+<li>トピック作成者は作成したトピックを削除できる権利を持ちます．</li>
+<li>著作権者の許可を得ていない著作物，個人のプライバシーに関わる情報等の投稿は禁止いたします．</li>
+</div>
+<h3><br>
+</h3>
+<br>
+<span style="font-weight: bold;">左側のカテゴリ一覧から自分の興味のあるカテゴリを選択してください．</span><br
+ style="font-weight: bold;">
+<br>
+<br>
+<div id="box">
+<h3>トピック作成</h3>
+<br>
+<form method="post" action="http://localhost:3997/command/manage/">
+  <p> カテゴリ
+  <select name="category">
+  <option>テストカテゴリ1</option>
+  <option selected="selected">テストカテゴリ2</option>
+  <option>テストカテゴリ3</option>
+  </select>
+  <br>
+タイトル<input name="title" size="40" type="text"> <br>
+投稿者<input name="author" type="text">メール<input name="mail" type="text">
+パスワード<input name="password" type="text"> <br>
+  <input name="user" value="true" type="hidden"> <textarea
+ name="message" rows="4" cols="60"></textarea> <br>
+  <input value="送信" type="submit"> <input value="取り消し" type="reset"> </p>
+</form>
+</div>
+</div>
+</body>
+</html>
