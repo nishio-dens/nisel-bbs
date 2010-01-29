@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=SHIFT_JIS">
+  <title>P2PBBS</title>
+  <style>
+<!--
+
+body {margin:0; padding:0; overflow:hidden;}
+div#leftbox {margin:0; padding:0; height:100%; width:150px; position:absolute; left:0; top:0;background-color:#F8F8FF}
+div#mainbox {margin:0 0 0 10em; padding:0; height:100%; overflow:auto;background-color:#FFFFFF}
+
+div#header{width:100%;margin:0 0 1em 0;text-align:left;background-color:#FFFFFF}
+div#footer{clear:both;width:100%;margin:5em 0 1em 0;text-align:left;}
+div#box{background-color:#FFFFFF}
+
+/* テーブル奇数*/
+.TableEven {
+background-color: #f7f7f7;
+}
+.TableOdd {
+background-color: #fcfcfc;
+}
+/* テーブル一覧関係 */
+#ListTable {
+clear: both;
+margin: 10px 25px 10px 25px;
+}
+#ListTableIn {
+width: 100%;
+}
+#ListTableIn table {
+width: 100%;
+}
+#ListTableIn th {
+padding: 5px;
+background-color: #336699;
+color: #ffffff;
+white-space: nowrap;
+}
+#ListTableIn td {
+padding: 5px;
+}
+-->
+  </style>
+</head>
+<body>
+<div id="leftbox">
+<h3>カテゴリ一覧</h3>
+<div style="text-align: left; margin-left: 10px;">
+<a href="test">テストカテゴリ1</a><br>
+<a href="test">テストカテゴリ2</a><br>
+<a href="test">テストカテゴリ3</a></div>
+</div>
+<div id="mainbox">
+<dl>
+  <font color="red" size="+2">oooo</font><br>
+  <br>
+  <a name="l1"></a><dt>1 名前 :<font color="#008800"><b> null </b></font><font
+ size="-1">[null] </font> 投稿日 :2009年12月3日 18時16分58秒 ID: testid<br>
+  </dt>
+  <dd><br>
+null <br>
+  </dd>
+  <br>
+  <a name="l2"></a><dt>2 名前 :<font color="#008800"><b> null </b></font><font
+ size="-1">[null] </font> 投稿日 :2009年12月3日 18時17分34秒 ID: null<br>
+  </dt>
+  <dd><br>
+テストメッセージ <br>
+  </dd>
+  <br>
+  <a name="l3"></a><dt>3 名前 :<font color="#008800"><b> null </b></font><font
+ size="-1">[null] </font> 投稿日 :2009年12月3日 18時17分36秒 ID: null<br>
+  </dt>
+  <dd><br>
+テストメッセージ <br>
+  </dd>
+  <br>
+</dl>
+<b>コメント投稿</b> <br>
+<form method="post" action="http://localhost:3997/command/write/"><input
+ name="category" value="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"
+ type="hidden"> <input name="topic"
+ value="e43e3d1158f78feef61d656228152bac23fe169c" type="hidden">投稿者<input
+ name="author" type="text">
+メール<input name="mail" type="text">
+パスワード<input name="password" type="text"> <br>
+  <textarea name="message" rows="4" cols="80">テストメッセージ</textarea> <br>
+  <input value="投稿" type="submit">　 <input value="取り消し" type="reset"></form>
+<p><b>コメント削除</b></p>
+<form method="post" action="http://localhost:3997/command/delete/"><input
+ name="category" value="a94a8fe5ccb19ba61c4c0873d391e987982fbbd3"
+ type="hidden"> <input name="topic"
+ value="e43e3d1158f78feef61d656228152bac23fe169c" type="hidden"><input
+ name="first" value="1" type="hidden">削除するコメント番号(1でトピック全体を削除）<input
+ name="no" type="text">
+パスワード<input name="password" type="text"><br>
+  <br>
+  <input value="削除" type="submit">　<br>
+  <br>
+  <a href="javascript:history.back();">戻る</a> </form>
+</div>
+</body>
+</html>
