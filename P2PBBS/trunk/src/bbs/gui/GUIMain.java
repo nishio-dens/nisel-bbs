@@ -149,6 +149,7 @@ public class GUIMain {
 			gridBagConstraints11.ipadx = 312;
 			gridBagConstraints11.ipady = 1;
 			gridBagConstraints11.weightx = 1.0;
+			gridBagConstraints11.anchor = GridBagConstraints.WEST;
 			gridBagConstraints11.insets = new Insets(4, 4, 5, 16);
 			GridBagConstraints gridBagConstraints10 = new GridBagConstraints();
 			gridBagConstraints10.insets = new Insets(4, 15, 4, 3);
@@ -191,6 +192,7 @@ public class GUIMain {
 			gridBagConstraints5.ipadx = 329;
 			gridBagConstraints5.ipady = 1;
 			gridBagConstraints5.weightx = 1.0;
+			gridBagConstraints5.anchor = GridBagConstraints.WEST;
 			gridBagConstraints5.insets = new Insets(3, 4, 4, 16);
 			GridBagConstraints gridBagConstraints4 = new GridBagConstraints();
 			gridBagConstraints4.fill = GridBagConstraints.VERTICAL;
@@ -200,6 +202,7 @@ public class GUIMain {
 			gridBagConstraints4.ipadx = 269;
 			gridBagConstraints4.ipady = 1;
 			gridBagConstraints4.weightx = 1.0;
+			gridBagConstraints4.anchor = GridBagConstraints.WEST;
 			gridBagConstraints4.insets = new Insets(4, 4, 5, 16);
 			GridBagConstraints gridBagConstraints3 = new GridBagConstraints();
 			gridBagConstraints3.fill = GridBagConstraints.VERTICAL;
@@ -401,7 +404,7 @@ public class GUIMain {
 	private JTextField getJTextField() {
 		if (jTextField == null) {
 			jTextField = new JTextField();
-			jTextField.setText("");
+			jTextField.setText("bbs.csci.yamanashi.ac.jp:40002");
 		}
 		return jTextField;
 	}

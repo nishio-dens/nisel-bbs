@@ -50,8 +50,8 @@ public class TopicManageNodeUpdater implements Runnable {
 	// バックアップコメントを管理しているノードのアドレス
 	// 自分から距離が近い順に並んでいる
 	private List<MessagingAddress> manageNodeAddress = null;
-	//トピック管理ノード情報のTTL (デフォルトでは10分）
-	private long topicManageNodeInfoTTL = 10 * 60 * 1000/*60 * 1000*/;
+	//トピック管理ノード情報のTTL (デフォルトでは2分）
+	private long topicManageNodeInfoTTL = 2 * 60 * 1000/*60 * 1000*/;
 	//トピック情報のTTL
 	private long topicInfoTTL = topicUpdateInterval * 3;
 	//retry回数

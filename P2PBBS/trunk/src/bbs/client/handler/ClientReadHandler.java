@@ -314,7 +314,7 @@ public class ClientReadHandler implements HttpHandler {
 				+ "メール<input type=\"text\" name=\"mail\" />\n"
 				+ "パスワード<input type=\"password\" name=\"password\" />\n"
 				+ "<br>\n"
-				+ "<textarea name=\"message\" rows=\"4\" cols=\"80\">テストメッセージ</textarea>\n"
+				+ "<textarea name=\"message\" rows=\"4\" cols=\"80\"></textarea>\n"
 				+ "<br>\n"
 				+ "<input type=\"hidden\" name=\"user\" value=\"true"
 				+ "\"/>\n"
