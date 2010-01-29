@@ -38,7 +38,7 @@ public class DHTConfiguration extends HighLevelServiceConfiguration {
 	public final static boolean DEFAULT_MULTIPLE_VALUES_FOR_A_SINGLE_KEY = true;
 	public final static int DEFAULT_NUM_SPARE_ROOT_CANDIDATES = 3;
 
-	public final static int DEFAULT_NUM_REPLICA = 3;
+	public final static int DEFAULT_NUM_REPLICA = 2;
 	public final static boolean DEFAULT_ROOT_DOES_REPLICATION = true;
 	//public final static int DEFAULT_NUM_NODES_ASKED_TO_TRANSFER = 0;
 	public final static int DEFAULT_NUM_NODES_ASKED_TO_TRANSFER = 2;

@@ -392,7 +392,9 @@ public class ClientReadHandler implements HttpHandler {
 			i++;
 		}
 		buf.append("</tbody>\n");
-		buf.append("</table></div></div>" +  "</div>\n");
+		buf.append("</table><br><a href=\"http://" + GATEWAY_ADDRESS + ":" + port + "/read/local/"
+					+ categoryID + "\">" + "過去のトピックを閲覧するにはこちらをクリックしてください．</a>"
+					+ "</div></div>" +  "</div>\n");
 		buf.append("");
 		return buf.toString();
 	}
@@ -530,6 +532,8 @@ public class ClientReadHandler implements HttpHandler {
                    + "<li>トピック作成者は作成したトピックを削除できる権利を持ちます．</li>\n"
                    + "<li>著作権者の許可を得ていない著作物，\n"
                    + "個人のプライバシーに関わる情報等の投稿は禁止いたします．</li>\n"
+                   + "<li>過去のトピックには，\n"
+                   + "コメントの投稿を行うことはできません．閲覧のみ可能です．</li>\n"
                    + "</div><br>\n");
 		return buf.toString();
 	}
