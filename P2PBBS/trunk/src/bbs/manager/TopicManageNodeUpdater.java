@@ -461,12 +461,12 @@ public class TopicManageNodeUpdater implements Runnable {
 						// 重複した管理ノードにどれだけのコメントを保持しているか尋ねる
 						String url = "http://" + address + "/command/have/"
 								+ categoryID + "/" + topicID;
-						receiveData = haveSock.sendAndReceive(url, "POST", "");
+						receiveData = haveSock.sendAndReceive(url, "GET", "");
 
 						// 重複した管理ノードから返事があった
 						if (receiveData != null) {
 							String[] haveStr = receiveData.split(" |\n");
-							if (haveStr != null && haveStr.length == 4
+							if (haveStr != null && haveStr.length >= 4
 									&& haveStr[0].equals("I_HAVE")
 									&& haveStr[1].equals(categoryID)
 									&& haveStr[2].equals(topicID)) {
