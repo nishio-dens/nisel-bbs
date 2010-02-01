@@ -161,9 +161,8 @@ public class BBSManager {
 		//削除要求が正しく実行できたか
 		boolean deleteAccept = true;
 		try {
-			//もし自身でトピックデータを保持していた場合
+			//一番初めに要求を受けたノード
 			if( first == true ) {
-				//自分はトピックの管理者である．
 				// DHTから管理ノード取得
 				SortedMap<Long, String> manageNodes = this.dhtManager
 						.getTTLValuePair(categoryID + topicID);

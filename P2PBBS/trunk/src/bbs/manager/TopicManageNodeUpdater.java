@@ -194,6 +194,7 @@ public class TopicManageNodeUpdater implements Runnable {
 								.getDate(), HTMLEncode.replaceSpace(HTMLEncode
 								.replaceNewline(comment.getMessage())));
 				sendComment.setTitle(comment.getTitle());
+				sendComment.setPassword(comment.getPassword());
 				buf.append(TopicManager.commentElementToXML(sendComment));
 			}
 			// データ送信先
