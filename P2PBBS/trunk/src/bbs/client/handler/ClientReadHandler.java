@@ -385,7 +385,7 @@ public class ClientReadHandler implements HttpHandler {
 					+ categoryID + "/" + topic.getTid() + "/0-0\">");
 			buf.append(HTMLEncode.encode(topic.getTitle()));
 			buf.append("</a></td>\n");
-			buf.append("<td>未実装</td>");
+			buf.append("<td>" + topic.getAuthor() + "</td>");
 			buf.append("<td>" + topic.getNumOfComment() + "</td>\n");
 			buf.append("<td>" + df.format((double)topic.getActivity() / 120.0) + "回/時</td>");
 			buf.append("</tr>");

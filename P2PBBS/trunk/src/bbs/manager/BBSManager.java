@@ -449,6 +449,7 @@ public class BBSManager {
 					buf.append("<topic><tid>" + topic.getTid() + "</tid>"
 							+ "<title>" + topic.getTitle() + "</title>"
 							+ "<num>" + topic.getNumOfComment() + "</num>"
+							+ "<author>" + topic.getAuthor() + "</author>"
 							+ "<activity>" + topic.getActivity()
 							+ "</activity></topic>\n");
 				}

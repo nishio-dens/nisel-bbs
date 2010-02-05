@@ -17,6 +17,8 @@ public class TopicInformationElement {
 	private int numOfComment = 0;
 	//活性度
 	private int activity = 0;
+	//作者
+	private String author = null;
 	
 	public TopicInformationElement() {
 		
@@ -29,14 +31,16 @@ public class TopicInformationElement {
 	 * @param title
 	 * @param numOfComment
 	 * @param activity
+	 * @param author
 	 */
 	public TopicInformationElement(String categoryID, String tid, String title,
-			int numOfComment, int activity) {
+			int numOfComment, int activity, String author) {
 		this.categoryID = categoryID;
 		this.tid = tid;
 		this.title = title;
 		this.numOfComment = numOfComment;
 		this.activity = activity;
+		this.author = author;
 	}
 	
 	
@@ -153,5 +157,21 @@ public class TopicInformationElement {
 		return "TopicInformationElement [activity=" + activity
 				+ ", categoryID=" + categoryID + ", numOfComment="
 				+ numOfComment + ", tid=" + tid + ", title=" + title + "]";
+	}
+
+	/**
+	 * authorを取得します。
+	 * @return author
+	 */
+	public String getAuthor() {
+	    return author;
+	}
+
+	/**
+	 * authorを設定します。
+	 * @param author author
+	 */
+	public void setAuthor(String author) {
+	    this.author = author;
 	}
 }

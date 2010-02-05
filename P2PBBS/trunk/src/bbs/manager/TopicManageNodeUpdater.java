@@ -289,6 +289,13 @@ public class TopicManageNodeUpdater implements Runnable {
 			// 保持しているコメント数
 			int manageCommentNum = this.topicManager.size(topicID, categoryID);
 			buf.append("<num>" + manageCommentNum + "</num>\n");
+			// 作成者
+			SortedSet<CommentElement> topics = this.topicManager.get(topicID, categoryID, 1, 2);
+			String author = null;
+			for( CommentElement topic : topics) {
+				author = topic.getAuthor();
+			}
+			buf.append("<author>" + author + "</author>");
 			//活性度
 			int activity = this.topicActivityManager.getActivity(categoryID, topicID);
 			buf.append("<activity>" + activity + "</activity>");

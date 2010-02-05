@@ -269,8 +269,9 @@ public class BBSXMLParser {
 					String title = getChildren(element, "title");
 					int num = Integer.parseInt( getChildren(element, "num") );
 					int activity = Integer.parseInt( getChildren(element, "activity"));
+					String author = getChildren(element, "author");
 					TopicInformationElement elem = new TopicInformationElement(
-							categoryID, tid, title, num, activity);
+							categoryID, tid, title, num, activity, author);
 					// id
 					retArray.add(elem);
 				}catch(Exception e) {
